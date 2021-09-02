@@ -35,8 +35,8 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
            <!--  ###users set to be admin### -->
             <% if current_user.admin %>
-            <a class="dropdown-item" href="#">New Post</a>
-            <%#= link_to "New Post", new_post_path, class:'dropdown-item' %>
+            <!-- <a class="dropdown-item" href="#">New Post</a> -->
+            <%= link_to "New Post", new_post_path, class:'dropdown-item' %>
             <% end %>
             <%= link_to "Account Setting", edit_user_registration_path, class:'dropdown-item'%>
             <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:'dropdown-item' %>
