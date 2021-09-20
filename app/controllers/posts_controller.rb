@@ -7,9 +7,16 @@ class PostsController < ApplicationController
   #is_admin method from application controller
   before_action :is_admin!, except: [:index, :show]
 
+  POSTS_PER_PAGE = 10
+
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    #params are strings => array, to_i to convert it to integer
+    @page = params.fetch(:page, 0).to_i
+    @all_posts = Post.all.order("created_at DESC")
+    @number_of_pages = @all_posts.length/POSTS_PER_PAGE
+    @posts = @all_posts.offset(@page * POSTS_PER_PAGE).limit(POSTS_PER_PAGE)
+    # .order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /posts/1 or /posts/1.json

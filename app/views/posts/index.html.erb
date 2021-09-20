@@ -1,10 +1,15 @@
 <div class="container">
+
     <div class="row">
         <div class="digg_pagination">
             <%#= will_paginate @posts, :container => false %>
+            <%= link_to "Previous Page", posts_path(page: @page - 1) %>
+            <% for page_number in 1..@number_of_pages do %>
+              <%= link_to page_number, posts_path(page: page_number-1) %>
+            <% end %>
+            <%= link_to "Next Page", posts_path(page: @page + 1) %>
         </div>
     </div>
-
 
     <% @posts.each do |post| %>
     <div class="row">
@@ -27,4 +32,23 @@
         </div>
     </div>
     <% end %>
+</div>
+
+
+<div class="post-index-main">
+  <div class="post-index-inner-top">
+    <% @posts.each do |post| %>
+     <img class="card-img-top" src="<%= url_for post.optimized_image(post.thumbnail, 586, 180) %>" alt="Blog Post Image Card" />
+        <div class="post-index-body">
+          <h5><%= link_to post.title, post %></h5>
+          <p><%= post.body.to_plain_text.truncate_words(50) %></p>
+        </div>
+  </div>
+  <div class="post-index-inner-bottom">
+    <div class="post-index-details">
+      <p><%= post.updated_at.strftime("%A, %B %e, %Y") %> by</p>
+      <p> <%= post.user.username %> | <%= pluralize(post.views, "View") %> | 0 comments</p>
+    </div>
+    <% end %>
+  </div>
 </div>

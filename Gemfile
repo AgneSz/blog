@@ -28,6 +28,9 @@ gem 'image_processing', '~> 1.2'
 ##### Custom Gem Area
 gem 'devise'
 gem 'simple_form'
+gem 'faker'
+gem 'will_paginate'
+gem 'friendly_id'
 #####
 
 # Reduces boot times through caching; required in config/boot.rb
